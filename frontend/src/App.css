@@ -1,0 +1,114 @@
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.app-header h1 {
+  margin: 0 0 4px;
+  font-size: 28px;
+}
+
+.total-display {
+  color: var(--text-muted);
+  font-size: 18px;
+}
+
+.upload-panel,
+.chart-card,
+.table-section {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.upload-panel h2,
+.table-section h2 {
+  margin-top: 0;
+}
+
+.upload-preview img {
+  max-width: 220px;
+  max-height: 220px;
+  margin: 12px 0;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.upload-panel button {
+  display: block;
+  margin-top: 12px;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.upload-panel button:disabled {
+  background: var(--border);
+  cursor: not-allowed;
+}
+
+.upload-error {
+  color: var(--danger);
+  margin-top: 8px;
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 640px) {
+  .charts {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart-card h2 {
+  font-size: 18px;
+  margin-top: 0;
+}
+
+.receipt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.receipt-table th,
+.receipt-table td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.amount-cell {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.remove-button {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--danger);
+}
+
+.empty-message {
+  color: var(--text-muted);
+}

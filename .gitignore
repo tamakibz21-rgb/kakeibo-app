@@ -1,0 +1,20 @@
+# 依存パッケージ
+node_modules/
+
+# 環境変数(APIキーなど秘匿情報)
+.env
+.env.local
+backend/.env
+
+# ビルド成果物
+frontend/dist/
+
+# ログ
+*.log
+npm-debug.log*
+
+# OS/エディタ
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea

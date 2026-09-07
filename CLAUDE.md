@@ -4,8 +4,12 @@
 
 ## プロジェクト概要
 
-kakeibo-app は家計簿(収支管理)アプリケーションです。
-技術スタックやディレクトリ構成が固まり次第、このセクションを更新してください。
+kakeibo-app は、レシート画像をアップロードするとClaude APIが商品名・金額・日付を自動読み取りし、
+カテゴリ別に分類・集計する家計簿Webアプリです。
+
+- `frontend/` : React (Vite) 製のフロントエンド。Chart.jsでカテゴリ別円グラフ・月別棒グラフを表示。データはlocalStorageに保存。
+- `backend/` : Node.js (Express) 製のバックエンド。Claude API (`claude-haiku-4-5-20251001`) の呼び出しはここでのみ行い、APIキーはブラウザに渡さない。
+- Claude APIキーは `backend/.env` で管理し、`.gitignore` でコミット対象から除外している(`backend/.env.example` を参照)。
 
 ## Git運用ルール
 
@@ -26,9 +30,12 @@ kakeibo-app は家計簿(収支管理)アプリケーションです。
 
 ## コマンド
 
-プロジェクトの技術スタックが決まり次第、以下を追記してください。
+- セットアップ: `npm run install:all`(ルートで実行、frontend/backend両方の依存関係をインストール)
+- 開発サーバー起動: `npm run dev`(ルートで実行、frontend: http://localhost:5173 / backend: http://localhost:3001 を同時起動)
+- フロントエンドのみ起動: `npm run dev --prefix frontend`
+- バックエンドのみ起動: `npm run dev --prefix backend`
+- フロントエンドビルド: `npm run build --prefix frontend`
 
-- セットアップ: (未定)
-- 開発サーバー起動: (未定)
-- テスト実行: (未定)
-- ビルド: (未定)
+## コーディング規約
+
+- コメントは日本語で記載する。
