@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import { CategoryPieChart } from './components/CategoryPieChart';
+import { CategorySummary } from './components/CategorySummary';
 import { MonthlyBarChart } from './components/MonthlyBarChart';
 import { ReceiptTable } from './components/ReceiptTable';
 import { ReceiptUpload } from './components/ReceiptUpload';
@@ -42,6 +43,7 @@ function App() {
         <div className="chart-card">
           <h2>カテゴリ別支出</h2>
           <CategoryPieChart items={items} />
+          <CategorySummary items={items} />
         </div>
         <div className="chart-card">
           <h2>月別支出</h2>

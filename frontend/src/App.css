@@ -105,6 +105,11 @@
   margin-top: 0;
 }
 
+.chart-card .receipt-table {
+  margin-top: 16px;
+  font-size: 13px;
+}
+
 .receipt-table {
   width: 100%;
   border-collapse: collapse;
