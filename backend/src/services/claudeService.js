@@ -60,7 +60,7 @@ export async function extractReceipt(imageBuffer, mimeType) {
 
   const response = await anthropic.messages.create({
     model: MODEL,
-    max_tokens: 1024,
+    max_tokens: 2048,
     tools: [EXTRACT_RECEIPT_TOOL],
     tool_choice: { type: 'tool', name: 'extract_receipt' },
     messages: [
@@ -77,7 +77,14 @@ export async function extractReceipt(imageBuffer, mimeType) {
           },
           {
             type: 'text',
-            text: 'このレシート画像を読み取り、店舗名・購入日・商品ごとの名称/金額/カテゴリをextract_receiptツールで返してください。',
+            text: [
+              'このレシート画像を一字一句正確に読み取り、extract_receiptツールで返してください。',
+              '特に次の点に注意してください。',
+              '- 商品名はレシートに印字されている通りに記載し、省略や意訳をしない(読み取れない場合のみ推測であることが分かるようにする)',
+              '- 金額の桁を読み間違えないこと(0とO、1とl、桁区切りのカンマなどに注意し、1文字ずつ確認する)',
+              '- レシートに小計・合計金額が印字されている場合は、商品ごとの金額の合計と一致するか確認し、不一致があれば読み取りを見直してから回答する',
+              '- 割引・値引きの表記がある場合は、対象商品の金額に反映させる',
+            ].join('\n'),
           },
         ],
       },
