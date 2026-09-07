@@ -27,6 +27,15 @@ const EXTRACT_RECEIPT_TOOL = {
         type: 'string',
         description: '購入日。YYYY-MM-DD形式。年が読み取れない場合は現在の年を使う。',
       },
+      time: {
+        type: 'string',
+        description: '購入時刻。HH:MM形式(24時間表記)。レシートに記載がない場合は空文字。',
+      },
+      total: {
+        type: 'number',
+        description:
+          'レシートに記載されている合計金額(税込)。記載がない場合は商品金額の合計を計算する。',
+      },
       items: {
         type: 'array',
         description: 'レシートに記載された購入商品の一覧',
@@ -45,7 +54,7 @@ const EXTRACT_RECEIPT_TOOL = {
         },
       },
     },
-    required: ['date', 'items'],
+    required: ['date', 'total', 'items'],
   },
 };
 
@@ -84,6 +93,7 @@ export async function extractReceipt(imageBuffer, mimeType) {
               '- 金額の桁を読み間違えないこと(0とO、1とl、桁区切りのカンマなどに注意し、1文字ずつ確認する)',
               '- レシートに小計・合計金額が印字されている場合は、商品ごとの金額の合計と一致するか確認し、不一致があれば読み取りを見直してから回答する',
               '- 割引・値引きの表記がある場合は、対象商品の金額に反映させる',
+              '- 購入時刻と合計金額(税込)も、レシートに印字されている通り正確に読み取る',
             ].join('\n'),
           },
         ],

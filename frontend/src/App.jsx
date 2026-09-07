@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 import { CategoryPieChart } from './components/CategoryPieChart';
 import { MonthlyBarChart } from './components/MonthlyBarChart';
@@ -6,9 +7,16 @@ import { ReceiptUpload } from './components/ReceiptUpload';
 import { useReceipts } from './hooks/useReceipts';
 
 function App() {
-  const { items, addReceipt, removeItem } = useReceipts();
+  const { items, addReceipt, removeItem, validateReceipt } = useReceipts();
+  const [warnings, setWarnings] = useState([]);
 
   const total = items.reduce((sum, item) => sum + item.amount, 0);
+
+  // 読み取り結果を検証してから登録する(警告があっても登録自体は行い、内容を確認できるようにする)
+  const handleExtracted = (receipt) => {
+    setWarnings(validateReceipt(receipt));
+    addReceipt(receipt);
+  };
 
   return (
     <div className="app">
@@ -17,7 +25,18 @@ function App() {
         <p className="total-display">合計支出: {total.toLocaleString()}円</p>
       </header>
 
-      <ReceiptUpload onExtracted={addReceipt} />
+      <ReceiptUpload onExtracted={handleExtracted} />
+
+      {warnings.length > 0 && (
+        <div className="warning-banner">
+          {warnings.map((message) => (
+            <p key={message}>⚠ {message}</p>
+          ))}
+          <button className="warning-dismiss" onClick={() => setWarnings([])}>
+            閉じる
+          </button>
+        </div>
+      )}
 
       <section className="charts">
         <div className="chart-card">
